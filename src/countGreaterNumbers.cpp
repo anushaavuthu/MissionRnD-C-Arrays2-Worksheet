@@ -1,5 +1,6 @@
 /*
-OVERVIEW: You are given a bank statement where transactions are ordered by date. Write a function that finds the number of transactions in that statement after a given date.
+OVERVIEW: You are given a bank statement where transactions are ordered by date. Write a function that finds the 
+number of transactions in that statement after a given date.
 -- find the count of numbers greater than a given number in a sorted array.
 E.g.: Input: A[3] = { { 10, "09-10-2003", "First" }, { 20, "19-10-2004", "Second" }, { 30, "03-03-2005", "Third" } };
 date = "19-10-2004"
@@ -21,5 +22,22 @@ struct transaction {
 };
 
 int countGreaterNumbers(struct transaction *Arr, int len, char *date) {
-	return -1;
+	int res = 0, flag = 0,flag1 = 0;
+	for (int i = 0; i < len; i++){
+		flag = 0;
+		for (int j = 0; j < 11; j++){
+			if (Arr[i].date[j] != date[j]){
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0){
+			flag1 = 1;
+			res = i;
+		}
+	}
+	if ((res == 0) && (flag1 == 0)){
+		return 0;
+	}
+	return len- res - 1;
 }
